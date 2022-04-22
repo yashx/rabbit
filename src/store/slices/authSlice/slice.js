@@ -33,7 +33,6 @@ const authSlice = createSlice({
       state.accessToken = action.payload;
     },
     setAccessToken: (state, action) => {
-      console.log(action.payload);
       state.accessToken = action.payload;
     },
   },

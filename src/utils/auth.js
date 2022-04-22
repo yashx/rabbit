@@ -1,5 +1,10 @@
 import axios from "axios";
 
+/**
+ * Fetches Application only Access token
+ * @param {string} clientId Client Id of Reddit App
+ * @returns Access token | null
+ */
 export async function getAppOnlyAccessToken(clientId) {
   const params = new URLSearchParams();
   params.append(
@@ -27,6 +32,13 @@ export async function getAppOnlyAccessToken(clientId) {
   }
 }
 
+/**
+ * Fetches access token and refresh token after user app authorisation
+ * @param {string} clientId Client Id of Reddit App
+ * @param {string} code Auth Code provided after user authorisation
+ * @param {string} redirect_uri Redirect URI; Must be same as value provided on Reddit app settings
+ * @returns Object with access token and refresh token | Object with null values
+ */
 export async function getUserTokens(clientId, code, redirect_uri) {
   const params = new URLSearchParams();
   params.append("code", code);
@@ -58,6 +70,11 @@ export async function getUserTokens(clientId, code, redirect_uri) {
   }
 }
 
+/**
+ * Revokes given refresh token and all related access tokens
+ * @param {string} clientId Client Id of Reddit App
+ * @param {string} refreshToken Refresh token for logged in user
+ */
 export async function revokeRefreshToken(clientId, refreshToken) {
   const params = new URLSearchParams();
   params.append("token", refreshToken);
@@ -71,6 +88,12 @@ export async function revokeRefreshToken(clientId, refreshToken) {
   });
 }
 
+/**
+ * Fethces new Access token by using refresh token
+ * @param {string} clientId Client Id of Reddit App
+ * @param {string} refreshToken Refresh token of logged in user
+ * @returns Access token | null
+ */
 export async function getNewAccessToken(clientId, refreshToken) {
   const params = new URLSearchParams();
   params.append("grant_type", "refresh_token");
