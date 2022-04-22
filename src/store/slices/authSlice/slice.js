@@ -3,8 +3,8 @@ import { CLIENT_ID } from "~/constants";
 
 let state = {
   isAuthenticated: false,
-  accessToken: "",
-  refreshToken: "",
+  accessToken: null,
+  refreshToken: null,
   clientId: CLIENT_ID,
 };
 
@@ -25,8 +25,8 @@ const authSlice = createSlice({
     },
     unauthenticate: (state) => {
       state.isAuthenticated = false;
-      state.accessToken = "";
-      state.refreshToken = "";
+      state.accessToken = null;
+      state.refreshToken = null;
     },
     appMode: (state, action) => {
       state.isAuthenticated = false;
