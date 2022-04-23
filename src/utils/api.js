@@ -27,7 +27,12 @@ RedditClient.interceptors.response.use(
   }
 );
 
-export async function fetchBestPosts() {
-  let res = await RedditClient.get("/best");
+export async function fetchPosts(route) {
+  let res = await RedditClient.get(route);
   return res.data;
+}
+
+export async function fetchPostComments(postId) {
+  let res = await RedditClient.get(`/comments/${postId}`);
+  return res.data[1];
 }
