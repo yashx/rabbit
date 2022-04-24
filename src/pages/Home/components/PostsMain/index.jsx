@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setActivePost } from "~/store/slices/displaySlice";
+import { useSelector } from "react-redux";
 import { fetchPosts } from "~/utils/api";
+import Post from "./components/Post";
 
-function PostsMain(props) {
+function PostsMain() {
   const activePostRoute = useSelector((state) => state.display.activePostRoute);
   const [posts, setPosts] = useState([]);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
@@ -17,19 +16,10 @@ function PostsMain(props) {
   }, [activePostRoute]);
 
   return (
-    <div className={props.className}>
+    <div className="bg-gray-200 w-1/3 h-screen">
       <div className="overflow-y-scroll h-full w-full">
         {posts.map((post) => {
-          return (
-            <div
-              className="bg-amber-300 my-2 p-4"
-              onClick={() => {
-                dispatch(setActivePost(post.data.id));
-              }}
-            >
-              {post.data.title}
-            </div>
-          );
+          return <Post data={post.data} key={post.data.name} />;
         })}
       </div>
     </div>
