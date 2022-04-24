@@ -10,7 +10,7 @@ dayjs.extend(relativeTime);
 function Post({ data }) {
   const dispatch = useDispatch();
   const setActive = () => {
-    dispatch(setActivePost(data.id));
+    dispatch(setActivePost(data));
   };
 
   const flairElement = data.link_flair_text ? (

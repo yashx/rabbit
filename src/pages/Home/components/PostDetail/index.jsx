@@ -9,7 +9,7 @@ function PostDetail(props) {
   useEffect(() => {
     (async () => {
       if (activePost) {
-        let res = await fetchPostComments(activePost);
+        let res = await fetchPostComments(activePost.id);
         console.log(res);
         setComments(res.data.children);
       }
