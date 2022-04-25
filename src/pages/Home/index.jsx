@@ -1,11 +1,13 @@
 import PostDetails from "./components/PostDetail";
 import PostsMain from "./components/PostsMain";
 
+import styles from "./index.module.css";
+
 function Home() {
   return (
-    <div className="flex">
+    <div className={styles.container}>
       <PostsMain />
-      <PostDetails className="bg-red-400 w-2/3 h-screen" />
+      <PostDetails />
     </div>
   );
 }

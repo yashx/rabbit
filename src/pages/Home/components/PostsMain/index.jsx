@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveRoute } from "~/store/slices/displaySlice";
 import { fetchPosts } from "~/utils/api";
-import Post from "./components/Post";
+import Post from "../Post";
+
+import styles from "./index.module.css";
 
 function PostsMain() {
   const activePostRoute = useSelector((state) => state.display.activePostRoute);
@@ -19,10 +21,10 @@ function PostsMain() {
   }, [activePostRoute]);
 
   return (
-    <div className="bg-gray-200 w-1/3 h-screen flex flex-col">
+    <div className={styles.container}>
       <input
         type="text"
-        className="w-full h-12 p-2"
+        className={styles.subreddit_input}
         placeholder="subreddit"
         value={textInput}
         onChange={(e) => {
@@ -32,7 +34,7 @@ function PostsMain() {
           if (e.key === "Enter") dispatch(setActiveRoute(textInput));
         }}
       />
-      <div className="overflow-y-scroll h-full flex-grow">
+      <div className={styles.posts_container}>
         {posts.map((post) => {
           return <Post data={post.data} key={post.data.name} />;
         })}
