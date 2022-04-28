@@ -10,7 +10,7 @@ import classNames from "classnames";
 
 dayjs.extend(relativeTime);
 
-function Post({ data }) {
+function Post({ data, compact }) {
   const dispatch = useDispatch();
   const setActive = () => {
     dispatch(setActivePost(data));
@@ -32,7 +32,7 @@ function Post({ data }) {
     <div className={styles.awards_container}>
       {data.all_awardings.map((award) => {
         return (
-          <div className={styles.award}>
+          <div className={styles.award} key={award.id}>
             <img
               src={htmlUnencode(award.resized_icons[0].url)}
               title={award.name + ": " + award.description}
@@ -44,9 +44,33 @@ function Post({ data }) {
     </div>
   );
 
-  const previewElement = data.thumbnail && (
+  const previewElement = data.thumbnail && compact && (
     <img className={styles.preview_img} src={data.thumbnail} />
   );
+
+  let mediaElement = null;
+  if (!compact) {
+    switch (data.post_hint) {
+      case "image":
+        mediaElement = (
+          <a
+            className={styles.media_container}
+            href={data.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={data.url} className={styles.media_image} />;
+          </a>
+        );
+        break;
+      default:
+        mediaElement = (
+          <div className={styles.media_container}>
+            <div className={styles.media_element}>Media</div>;
+          </div>
+        );
+    }
+  }
 
   const actionsElement = (
     <div className={styles.actions}>
@@ -74,10 +98,12 @@ function Post({ data }) {
         </div>
         {previewElement}
       </div>
+      {data.post_hint}
       {awardsElement}
-      <div className={styles.footer}>
-        <div>{data.num_comments} comments</div>
+      {mediaElement}
+      <div className={classNames(styles.footer, compact && styles.compact)}>
         {actionsElement}
+        <div>{data.num_comments} comments</div>
       </div>
     </div>
   );

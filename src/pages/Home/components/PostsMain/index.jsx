@@ -36,7 +36,7 @@ function PostsMain() {
       />
       <div className={styles.posts_container}>
         {posts.map((post) => {
-          return <Post data={post.data} key={post.data.name} />;
+          return <Post data={post.data} key={post.data.id} compact={true} />;
         })}
       </div>
     </div>

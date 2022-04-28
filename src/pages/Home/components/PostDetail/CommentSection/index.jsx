@@ -19,7 +19,11 @@ function CommentSection({ activePost }) {
   return (
     <div className={styles.comments_container}>
       {comments.map((comment) => {
-        return <div className={styles.comment}>{comment.data.body}</div>;
+        return (
+          <div className={styles.comment} key={comment.name}>
+            {comment.data.body}
+          </div>
+        );
       })}
     </div>
   );

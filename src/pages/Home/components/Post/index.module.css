@@ -22,6 +22,10 @@
   font-size: 0.875rem;
 }
 
+.container .footer.compact {
+  flex-direction: row-reverse;
+}
+
 .post {
   display: flex;
   align-items: flex-start;
@@ -71,6 +75,23 @@
   border-radius: 0.25rem;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+}
+
+.media_element {
+  background-color: blueviolet;
+  margin-top: 0.75rem;
+}
+
+.media_container {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.media_image {
+  max-width: 50%;
+  border: 1px solid black;
 }
 
 .actions .upvote:hover {
